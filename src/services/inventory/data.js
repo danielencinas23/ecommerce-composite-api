@@ -33,3 +33,10 @@ export const inventory = [
   },
 ];
 
+// Fallas simuladas para demostrar la resiliencia de la Composite API:
+//  - P-104: el almacén tarda más que el timeout del gateway.
+//  - P-105: el almacén responde con un error interno.
+export const simulatedFailures = {
+  'P-104': 'SLOW',
+  'P-105': 'ERROR',
+};
