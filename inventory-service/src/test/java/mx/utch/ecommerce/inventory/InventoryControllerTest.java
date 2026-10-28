@@ -10,7 +10,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-@SpringBootTest
+@SpringBootTest(properties = "inventory.simulated-delay-ms=10")
 @AutoConfigureMockMvc
 class InventoryControllerTest {
 
@@ -24,6 +24,13 @@ class InventoryControllerTest {
                 .andExpect(jsonPath("$.quantityAvailable").value(15))
                 .andExpect(jsonPath("$.warehouse.code").value("CUU-01"))
                 .andExpect(jsonPath("$.estimatedDeliveryDays").value(2));
+    }
+
+    @Test
+    void simulaErrorInternoParaP105() throws Exception {
+        mockMvc.perform(get("/microservices/inventory/P-105"))
+                .andExpect(status().isInternalServerError())
+                .andExpect(jsonPath("$.error").value("WAREHOUSE_UNAVAILABLE"));
     }
 
     @Test
