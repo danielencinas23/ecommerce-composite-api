@@ -1,0 +1,9 @@
+target/
+*.log
+.idea/
+*.iml
+.vscode/
+.DS_Store
+
+# Archivos de herramientas del editor
+.github/modernize/
