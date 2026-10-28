@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-Commerce Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <h1>E-Commerce Gateway <span>Dashboard</span></h1>
+      <p>Una sola petición a la Composite API reúne Catálogo, Inventario y Divisas.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <form id="search" class="search" autocomplete="off">
+      <label for="productId">ID del producto</label>
+      <div class="search-row">
+        <input id="productId" name="productId" value="P-101" placeholder="P-101" required>
+        <button type="submit">Consultar</button>
+      </div>
+      <div class="chips" aria-label="Productos de ejemplo">
+        <button type="button" data-id="P-101">P-101 · En stock</button>
+        <button type="button" data-id="P-102">P-102 · Stock bajo</button>
+        <button type="button" data-id="P-103">P-103 · Agotado</button>
+        <button type="button" data-id="P-104">P-104 · Timeout inventario</button>
+        <button type="button" data-id="P-105">P-105 · Error inventario</button>
+        <button type="button" data-id="P-999">P-999 · No existe</button>
+      </div>
+    </form>
+
+    <section id="result" aria-live="polite"></section>
+
+    <details class="raw">
+      <summary>Respuesta JSON de la Composite API</summary>
+      <p class="endpoint"><code id="endpoint"></code> <span id="timing"></span></p>
+      <pre id="json"></pre>
+    </details>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
