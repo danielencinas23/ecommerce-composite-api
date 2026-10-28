@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "E-Commerce Composite API",
+    "description": "Peticiones individuales a cada microservicio y a la Composite API. Levantar los 3 servicios antes (start-all.cmd).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "gateway", "value": "http://localhost:8080" },
+    { "key": "catalog", "value": "http://localhost:8081" },
+    { "key": "inventory", "value": "http://localhost:8082" },
+    { "key": "productId", "value": "P-101" }
+  ],
+  "item": [
+    {
+      "name": "1. Microservicio Catálogo",
+      "request": { "method": "GET", "url": "{{catalog}}/microservices/products/{{productId}}" }
+    },
+    {
+      "name": "2. Microservicio Inventario",
+      "request": { "method": "GET", "url": "{{inventory}}/microservices/inventory/{{productId}}" }
+    },
+    {
+      "name": "3. API Externa - Frankfurter",
+      "request": { "method": "GET", "url": "https://api.frankfurter.dev/v1/latest?from=USD&to=MXN" }
+    },
+    {
+      "name": "3b. API Externa - ExchangeRate-API (respaldo)",
+      "request": { "method": "GET", "url": "https://open.er-api.com/v6/latest/USD" }
+    },
+    {
+      "name": "4. Composite API - Resumen del producto",
+      "request": { "method": "GET", "url": "{{gateway}}/api/v1/product-summary/{{productId}}" }
+    },
+    {
+      "name": "Resiliencia",
+      "item": [
+        { "name": "P-104 - Timeout de inventario", "request": { "method": "GET", "url": "{{gateway}}/api/v1/product-summary/P-104" } },
+        { "name": "P-105 - Error 500 de inventario", "request": { "method": "GET", "url": "{{gateway}}/api/v1/product-summary/P-105" } },
+        { "name": "P-999 - Producto inexistente", "request": { "method": "GET", "url": "{{gateway}}/api/v1/product-summary/P-999" } }
+      ]
+    }
+  ]
+}
