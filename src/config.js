@@ -13,7 +13,12 @@ export const config = {
   inventoryUrl: env.INVENTORY_URL ?? `http://localhost:${inventoryPort}`,
 
   frankfurterUrl: env.FRANKFURTER_URL ?? 'https://api.frankfurter.dev/v1',
+  erApiUrl: env.ER_API_URL ?? 'https://open.er-api.com/v6',
 
   // Tiempo máximo que la Composite API espera a cada servicio
   serviceTimeoutMs: Number(env.SERVICE_TIMEOUT_MS ?? 3000),
+  // Antigüedad máxima de la última tasa conocida para usarla como respaldo
+  rateCacheMaxAgeMs: Number(env.RATE_CACHE_MAX_AGE_MS ?? 60 * 60 * 1000),
+  // Retardo simulado del inventario (producto P-104) para demostrar el timeout
+  simulatedDelayMs: Number(env.SIMULATED_DELAY_MS ?? 5000),
 };
