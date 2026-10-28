@@ -21,6 +21,7 @@
     <modules>
         <module>catalog-service</module>
         <module>inventory-service</module>
+        <module>composite-api</module>
     </modules>
 
     <properties>
